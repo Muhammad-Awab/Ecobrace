@@ -1,0 +1,35 @@
+﻿@page "/signupconfirmation"
+
+<AuthorizeView>
+    <Authorized>
+        <div class="container mt-5">
+            <div class="text-center">
+                <h3 class="display-3">Hi xxx, Welcome to EcoBrace!</h3>
+                <p class="lead">Your all in one solution for ECO4 lead generation.</p>
+                <div class="text-start mt-5">
+
+
+
+                    <p class=" text-center text-primary fs-1">
+                        Please log out and log back in to activate your account.
+                    </p>
+                    <p>
+                        Thanks for signing up to EcoBrace - your all in one AI powered ECO4 lead generation and analytics platform.
+
+                        You have been assigned <span class="fw-bold text-primary">XXX</span> account for your free trial. Please log out and back in to activate your account.
+
+                        We treat all customers joining us in beta phase as 'Power users' which means any issues they face or any support they need is treated as highest priority.
+                        So please provide any feedback or send any issues on <a href="mailto:hello@ecobrace.co.uk" target="_blank" rel="noopener noreferrer">hello@ecobrace.co.uk</a>.
+
+                        Please note, for bulk / wider area searches, use postcode field with postcode district codes e.g. KT22, RG30.
+
+                        We sincerely hope you find the tool useful and saves you time and effort in your day-to-day work.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        You do not have access to this page
+    </NotAuthorized>
+</AuthorizeView>

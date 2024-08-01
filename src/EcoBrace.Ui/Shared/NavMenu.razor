@@ -1,0 +1,110 @@
+﻿@using warmbrace.Shared.Constants
+@using Microsoft.FeatureManagement
+
+<div class="top-row navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">
+            <img src="images/logo/ICON TRANSPARENT.png" class="logo"
+                 alt=""
+                 id="logoimg" />
+        </a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="analyst">
+                <span class="oi oi-bar-chart" aria-hidden="true"></span> Analyst
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="mapview">
+                <span class="oi oi-map" aria-hidden="true"></span> Map view
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="dataenrichment">
+                <span class="oi oi-spreadsheet" aria-hidden="true"></span> Data enrichment
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="gbis-scoring-tool">
+                <span class="oi oi-calculator" aria-hidden="true"></span> GBIS Scoring Tool
+            </NavLink>
+        </div>
+        @if (showLeadsMarketPlace)
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="sellleads">
+                    <span class="oi oi-signpost" aria-hidden="true"></span> Sell leads
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="buyleads">
+                    <span class="oi oi-signpost" aria-hidden="true"></span> Buy leads
+                </NavLink>
+            </div>
+        }
+        else if (showLeadsMarketPlacePreview)
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="sellleads">
+                    <span class="oi oi-signpost" aria-hidden="true"></span> GameChanger
+                </NavLink>
+            </div>
+        }
+    </nav>
+</div>
+
+@code {
+
+    [Inject] protected IFeatureManager FeatureManager { get; set; } = default!;
+    private bool collapseNavMenu = true;
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private bool showLeadsMarketPlacePreview = false;
+    private bool showLeadsMarketPlace = false;
+    private bool showEnrichmentPage = false;
+
+    // Auth code
+    [CascadingParameter] private Task<AuthenticationState>? authenticationState { get; set; }
+    public string userName = "Hello";
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    // Auth code
+    protected override async Task OnInitializedAsync()
+    {
+        if (authenticationState is not null)
+        {
+            var state = await authenticationState;
+            userName = state?.User?.Identity?.Name ?? string.Empty;
+        }
+
+        if (await FeatureManager.IsEnabledAsync(FeatureFlags.LeadsMarketplacePreview))
+        {
+            showLeadsMarketPlacePreview = true;
+        }
+        if (await FeatureManager.IsEnabledAsync(FeatureFlags.LeadsMarketplace))
+        {
+            showLeadsMarketPlace = true;
+        }
+        if (await FeatureManager.IsEnabledAsync(FeatureFlags.DataEnrichment))
+        {
+            showEnrichmentPage = true;
+        }
+
+        await base.OnInitializedAsync();
+    }
+}

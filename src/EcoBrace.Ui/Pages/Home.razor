@@ -1,0 +1,631 @@
+﻿@page "/home"
+@inject IJSRuntime Js
+
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        await Js.InvokeVoidAsync("import", "/script/slider.js");
+
+    }
+}
+
+
+<header class="container-fluid d-flex justify-content-center align-items-center">
+    <div class="row center_content d-flex justify-content-center align-items-center">
+        <div class="col-12 col-sm-5 d-flex flex-column justify-content-start align-items-start header_leftSide">
+            <div class="l_top">
+                <h1>
+                    <span class="yellowColor">Welcome</span> to <br />
+                    <span class="fontSizeChange">
+                        EcoBrace<span class="darkYellowColor">!</span>
+                    </span>
+                </h1>
+                <p>Your all in one solution for ECO4 lead generation.</p>
+            </div>
+
+            <div class="l_bottom">
+                <div class="btns d-flex justify-content-center align-items-center">
+                    <a href="#tryForFree" class="fillBtn">Try for Free</a>
+                    <a href="#howItWorks" class="outlineBtn">How it works</a>
+                </div>
+                <p class="message">No credit card required!</p>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 videoContainer">
+            <a href="#videoModal"
+               class="video"
+               data-toggle="modal"
+               data-target="#videoModal">
+                <div class="shape"></div>
+
+                <div class="image">
+                    <img src="./images/header.png" alt="" />
+                    <div class="imageOverlay"></div>
+                </div>
+
+                <!-- play btn -->
+                <div class="playBtn">
+                    <svg width="22"
+                         height="26"
+                         viewBox="0 0 22 26"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 11.2679C22.3333 12.0378 22.3333 13.9622 21 14.732L3 25.1244C1.66666 25.8942 6.86406e-07 24.9319 7.53704e-07 23.3923L1.66223e-06 2.60769C1.72953e-06 1.06809 1.66667 0.105844 3 0.875644L21 11.2679Z"
+                              fill="white" />
+                    </svg>
+                </div>
+
+                <!-- watch demo -->
+                <div class="watchDemo">
+                    <p>Watch Demo</p>
+                </div>
+            </a>
+
+            <div class="modal fade"
+                 id="videoModal"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-labelledby="videoModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex justify-content-between align-items-center">
+                            <h5 class="modal-title" id="videoModalLabel">
+                                Watch Demo
+                            </h5>
+                            <button type="button"
+                                    class="close modalCloseIcon"
+                                    data-dismiss="modal"
+                                    aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item"
+                                        id="videoIframe"
+                                        src="https://www.youtube.com/embed/AdCSisZySvQ"
+                                        allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="howItWorks"
+         class="container-fluid d-flex justify-content-center align-items-center section01">
+    <div class="center_content">
+        <div class="topHeading">
+            <h1>How it works</h1>
+            <img src="./images/icons/underline.svg" alt="" />
+        </div>
+
+        <p class="pera">
+            EcoBrace combines energy efficiency data with DWP benefits and
+            helps identifying ECO4 eligible properties. You can use the
+            <a href="">analyst</a> to perform bulk search on a particular
+            postcode area e.g. KT22, and the tool returns thousands of
+            properties in one hit. You can then narrow down the results based
+            on various filters e.g. Benefits Factor %, Mains gas, fuel type
+            (oil, gas, electric etc.). Click the button below to see how it
+            works, or email us to book a call for further info.
+        </p>
+
+        <div class="lists">
+            <ul>
+                <li>
+                    <img src="./images/icons/Check.svg" alt="" />
+                    <p>Bulk area searches</p>
+                </li>
+                <li>
+                    <img src="./images/icons/Check.svg" alt="" />
+                    <p>Properties with missing EPC</p>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <img src="./images/icons/Check.svg" alt="" />
+                    <p>Filter on ECO4 eligible benefits %</p>
+                </li>
+                <li>
+                    <img src="./images/icons/Check.svg" alt="" />
+                    <p>Identify off mains gas properties</p>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <img src="./images/icons/Check.svg" alt="" />
+                    <p>Filter on EPC bands</p>
+                </li>
+                <li>
+                    <img src="./images/icons/Check.svg" alt="" />
+                    <p>Export search results to CSV/Excel</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="btns d-flex justify-content-center align-items-center">
+            <a href="https://youtu.be/AdCSisZySvQ"
+               target="_blank"
+               class="fillBtn">Learn More</a>
+            <a href="mailto:hello@ecobrace.co.uk" class="darkBtn">Email Us Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING -->
+<!-- ======= -->
+<section class="container-fluid d-flex justify-content-center align-items-center section02"
+         id="tryForFree">
+    <div class="center_content">
+        <div class="topHeading">
+            <h1>PRICING</h1>
+            <img src="./images/icons/underline02.svg" alt="" />
+        </div>
+
+        <p class="pera">
+            Pro and Premium plans start with an unlimited free trial
+            restricted to <br />
+            Derby, Liverpool and Birmingham postcodes for you to test the
+            tool***.
+        </p>
+
+        <!-- packages -->
+        <!-- ======== -->
+        <div class="row d-flex justify-content-center align-items-center packages">
+            <div class="col-3 col-12 freePackage">
+                <div class="p_row1">
+                    <h1>FREE</h1>
+                    <p>USAGE</p>
+                </div>
+
+                <div class="p_row2">
+                    <h1>£0</h1>
+                    <h4>/ Per Month</h4>
+                </div>
+
+                <a href="https://auth-ecobrace.uk.auth0.com/login?state=hKFo2SBNakZvMm82clNjbVE3dmk2ZGpwVUIzSWdteDVTeGVzU6FupWxvZ2luo3RpZNkgVThiNHRQOGV2RTRzUm56UTBKNmo0Q2MxSGZOWmZrMmSjY2lk2SBuV0JzMFdxUlpqaFdLZnhYa2JQNEV3dGdlUWNWNDRyMA&client=nWBs0WqRZjhWKfxXkbP4EwtgeQcV44r0&protocol=oauth2&redirect_uri=https%3A%2F%2Fecobrace.co.uk%2Fcallback&response_type=id_token&scope=openid%20profile%20email&response_mode=form_post&nonce=638573470615893936.ZTgyYTU1MzAtZjc3Yi00OTI0LTkxNDYtZGMxMTRiMDUxOThlNzg0OGFkMjQtYTVkNy00NjBlLThiZDMtYWE1NGU1OWI1MTMw&auth0Client=eyJuYW1lIjoiYXNwbmV0Y29yZS1hdXRoZW50aWNhdGlvbiIsInZlcnNpb24iOiIxLjQuMCJ9&x-client-SKU=ID_NET8_0&x-client-ver=7.1.2.0"
+                   class="p_row4">SIGN UP FOR FREE</a>
+
+                <ul class="p_row5">
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p>Search by EPC band</p>
+                    </li>
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p>Search by postcode</p>
+                    </li>
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p>Unlimited usage</p>
+                    </li>
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p>Provide feedback</p>
+                    </li>
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p>Request features</p>
+                    </li>
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p class="boldText">No need to Sign up*</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 col-12 freePackage premiumPackage">
+                <div class="p_row1">
+                    <h1>Premium</h1>
+                    <p>Package</p>
+                </div>
+
+                <div class="p_row2">
+                    <h1>£200 + vat</h1>
+                    <h4>/ Per Month</h4>
+                </div>
+
+                <a href="https://auth-ecobrace.uk.auth0.com/login?state=hKFo2SBNakZvMm82clNjbVE3dmk2ZGpwVUIzSWdteDVTeGVzU6FupWxvZ2luo3RpZNkgVThiNHRQOGV2RTRzUm56UTBKNmo0Q2MxSGZOWmZrMmSjY2lk2SBuV0JzMFdxUlpqaFdLZnhYa2JQNEV3dGdlUWNWNDRyMA&client=nWBs0WqRZjhWKfxXkbP4EwtgeQcV44r0&protocol=oauth2&redirect_uri=https%3A%2F%2Fecobrace.co.uk%2Fcallback&response_type=id_token&scope=openid%20profile%20email&response_mode=form_post&nonce=638573470615893936.ZTgyYTU1MzAtZjc3Yi00OTI0LTkxNDYtZGMxMTRiMDUxOThlNzg0OGFkMjQtYTVkNy00NjBlLThiZDMtYWE1NGU1OWI1MTMw&auth0Client=eyJuYW1lIjoiYXNwbmV0Y29yZS1hdXRoZW50aWNhdGlvbiIsInZlcnNpb24iOiIxLjQuMCJ9&x-client-SKU=ID_NET8_0&x-client-ver=7.1.2.0"
+                   class="p_row4">SIGN UP FOR FREE</a>
+
+                <ul class="p_row5">
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p>Everything in PRO</p>
+                    </li>
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p>Properties with Missing EPC's**</p>
+                    </li>
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p>Scotland EPC bulk search</p>
+                    </li>
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p>Unlimited email and phone support</p>
+                    </li>
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p class="boldText">Cancel anytime</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-3 col-12 freePackage">
+                <div class="p_row1">
+                    <h1>Pro</h1>
+                    <p>package</p>
+                </div>
+
+                <div class="p_row2">
+                    <h1>£50+ VAT</h1>
+                    <h4>/ Per Month</h4>
+                </div>
+
+                <a href="https://auth-ecobrace.uk.auth0.com/login?state=hKFo2SBNakZvMm82clNjbVE3dmk2ZGpwVUIzSWdteDVTeGVzU6FupWxvZ2luo3RpZNkgVThiNHRQOGV2RTRzUm56UTBKNmo0Q2MxSGZOWmZrMmSjY2lk2SBuV0JzMFdxUlpqaFdLZnhYa2JQNEV3dGdlUWNWNDRyMA&client=nWBs0WqRZjhWKfxXkbP4EwtgeQcV44r0&protocol=oauth2&redirect_uri=https%3A%2F%2Fecobrace.co.uk%2Fcallback&response_type=id_token&scope=openid%20profile%20email&response_mode=form_post&nonce=638573470615893936.ZTgyYTU1MzAtZjc3Yi00OTI0LTkxNDYtZGMxMTRiMDUxOThlNzg0OGFkMjQtYTVkNy00NjBlLThiZDMtYWE1NGU1OWI1MTMw&auth0Client=eyJuYW1lIjoiYXNwbmV0Y29yZS1hdXRoZW50aWNhdGlvbiIsInZlcnNpb24iOiIxLjQuMCJ9&x-client-SKU=ID_NET8_0&x-client-ver=7.1.2.0"
+                   class="p_row4">SIGN UP FOR FREE</a>
+
+                <ul class="p_row5">
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p>Filter by mains gas, fuel type etc.</p>
+                    </li>
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p>Properties with Missing EPC's**</p>
+                    </li>
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p>Scotland EPC bulk search</p>
+                    </li>
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p>Unlimited email and phone support</p>
+                    </li>
+                    <li>
+                        <img src="./images/icons/Check.svg" alt="" />
+                        <p class="boldText">Cancel anytime</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="horizontalLine"></div>
+
+        <ul class="textInBulletForm">
+            <li>
+                <p>
+                    You don't need to sign-up to do basic EPC searches with full
+                    postcode.
+                </p>
+            </li>
+            <li>
+                <p>
+                    For premium plan missing EPC's' - you get 5,000 FREE full
+                    postcodes per month as part of the your plan, once you run out
+                    of your quota, its 0.05£ per postcode for missing EPC's. This
+                    only applies if you select missing EPC's in the filter. Normal
+                    bulk searches (without missing EPC's) are always free. For
+                    example, if you do a bulk search on KT22, which contains 1000
+                    individual postcodes, it will cost you £50 (1000*£0.05=£50).
+                    You can minimise costs by applying filters like EPC band =
+                    (E,F,G, Missing) and Mains Gas = No, this will then reduce
+                    postcodes to around 75, and the cost will be just £3.75
+                    (75*£0.05=£3.75). The app will give you a warning when you are
+                    low on credit and perform a search, so you will always be in
+                    control.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Pro and Premium plans start as free trials for unlimited
+                    amount of time for you to play around with the tool. Once you
+                    are ready to upgrade, we remove restrictions and you gain full
+                    access to the whole of England and Wales.
+                </p>
+            </li>
+        </ul>
+    </div>
+</section>
+
+
+
+
+
+
+
+<section class="section03 container-fluid d-flex flex-column justify-content-center align-items-center">
+
+
+    <div class="center_content d-flex flex-column justify-content-center align-items-center mb-5">
+        <div class="topHeading">
+            <h1>OUR VALUABLE CUSTOMERS</h1>
+            <img src="./images/icons/underline03.svg" alt="" />
+        </div>
+    </div>
+    <div class="container text-center my-3">
+        <div class="row mx-auto my-auto justify-content-center">
+            <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="container">
+                    <div class="row ">
+                        <div class="col-md-1">
+                            <a class="carousel-control-prev  w-aut" href="#recipeCarousel" role="button" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon bg-warning" aria-hidden="true"></span>
+                            </a>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <div class="col-md-3">
+                                        <div class="card">
+                                            <div class="card-img">
+                                                <img src="./images/slider/5.png" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="col-md-3">
+                                        <div class="card">
+                                            <div class="card-img">
+                                                <img src="./images/slider/3.png" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="col-md-3">
+                                        <div class="card">
+                                            <div class="card-img">
+                                                <img src="./images/slider/5.png" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="col-md-3">
+                                        <div class="card">
+                                            <div class="card-img">
+                                                <img src="./images/slider/4.png" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="col-md-3">
+                                        <div class="card">
+                                            <div class="card-img">
+                                                <img src="./images/slider/1.png" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="col-md-3">
+                                        <div class="card">
+                                            <div class="card-img">
+                                                <img src="./images/slider/2.png" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel" role="button" data-bs-slide="next">
+                                <span class="carousel-control-next-icon  bg-warning" aria-hidden="true"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<section class="container-fluid d-flex justify-content-center align-items-center section04">
+    <div class="center_content">
+        <div class="topHeading">
+            <h1>Latest updates</h1>
+            <img src="./images/icons/underline04.svg" alt="" />
+        </div>
+
+        <div class="updates">
+            <div class="update01">
+                <h1>13-Jul-2024</h1>
+                <p>
+                    Added Scottish EPC's in our search engine (premium members
+                    only). Members can search on full postcodes or bulk search
+                    using partial postcodes (postcode districts).
+                </p>
+            </div>
+            <div class="update01">
+                <h1>10-Jul-2024</h1>
+                <p>
+                    Missing EPC count now available on summary charts for premium
+                    members.
+                </p>
+            </div>
+            <div class="update01">
+                <h1>09-Jul-2024</h1>
+                <p>
+                    In line with the popularity of GBIS, we have added roof / loft
+                    specific details in search results grid including Roof type
+                    (e.g. Pitched or Flat), loft insulation depth (e.g. 100 mm,
+                    25mm etc.) and Roof energy efficiency. These measures help
+                    identifying potential loft / GBIS work. These are only
+                    available to paid members.
+                </p>
+            </div>
+            <div class="update01">
+                <h1>23-Jun-2024</h1>
+                <p>
+                    Added GBIS Scoring calculator based on Ofgem GBIS Matrix v2.
+                    As an added bonus, you can use search for an EPC to populate
+                    some of the inputs. The calculator gives you PPS scores and
+                    potential funding.
+                </p>
+            </div>
+            <div class="update01">
+                <h1>13-Jul-2024</h1>
+                <p>
+                    Added Scottish EPC's in our search engine (premium members
+                    only). Members can search on full postcodes or bulk search
+                    using partial postcodes (postcode districts).
+                </p>
+            </div>
+            <div class="update01">
+                <h1>10-Jul-2024</h1>
+                <p>
+                    Missing EPC count now available on summary charts for premium
+                    members.
+                </p>
+            </div>
+            <div class="update01">
+                <h1>09-Jul-2024</h1>
+                <p>
+                    In line with the popularity of GBIS, we have added roof / loft
+                    specific details in search results grid including Roof type
+                    (e.g. Pitched or Flat), loft insulation depth (e.g. 100 mm,
+                    25mm etc.) and Roof energy efficiency. These measures help
+                    identifying potential loft / GBIS work. These are only
+                    available to paid members.
+                </p>
+            </div>
+            <div class="update01">
+                <h1>23-Jun-2024</h1>
+                <p>
+                    Added GBIS Scoring calculator based on Ofgem GBIS Matrix v2.
+                    As an added bonus, you can use search for an EPC to populate
+                    some of the inputs. The calculator gives you PPS scores and
+                    potential funding.
+                </p>
+            </div>
+        </div>
+
+        <button class="btn loadMore">
+            View More Updates
+            <svg width="26"
+                 height="8"
+                 viewBox="0 0 26 8"
+                 fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M25.3536 4.35355C25.5488 4.15829 25.5488 3.84171 25.3536 3.64645L22.1716 0.464466C21.9763 0.269204 21.6597 0.269204 21.4645 0.464466C21.2692 0.659728 21.2692 0.976311 21.4645 1.17157L24.2929 4L21.4645 6.82843C21.2692 7.02369 21.2692 7.34027 21.4645 7.53553C21.6597 7.7308 21.9763 7.7308 22.1716 7.53553L25.3536 4.35355ZM0 4.5H25V3.5H0V4.5Z"
+                      fill="white" />
+            </svg>
+        </button>
+    </div>
+</section>
+
+<!-- Notes -->
+<!-- ====== -->
+<section class="section05 container-fluid d-flex justify-content-center align-items-center">
+    <div class="center_content d-flex flex-column justify-content-center align-items-center">
+        <div class="topHeading">
+            <h1>Notes</h1>
+            <img src="./images/icons/underline05.svg" alt="" />
+        </div>
+
+        <ul>
+            <li><p>Only latest EPC's are included for a property</p></li>
+            <li>
+                <p>
+                    Only residential data is incldued in all analyses (we can
+                    include commercial data as well e.g. Epc's if there is enough
+                    demand from users)
+                </p>
+            </li>
+            <li>
+                <p>
+                    The data is extarcted from various sources, latest EPC's for
+                    every property, benefits data at area level (area is usually
+                    between 1 - 5 postcodes), geography data (addresses) and
+                    various other third party data sources are included
+                </p>
+            </li>
+            <li>
+                <p>
+                    Only England and Wales is supported at the moment. We plan to
+                    work on supporting Scotland data starting in April, but if
+                    theer is enough demand, we can bring it in early. Please email
+                    at
+                    <a href="mailto:hello@ecobrace.co.uk">hello@ecobrace.co.uk</a>
+                    if you want to see Scottish data.
+                </p>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- Additional info for members -->
+<!-- =========================== -->
+<section class="section05 section06 container-fluid d-flex justify-content-center align-items-center">
+    <div class="center_content d-flex flex-column justify-content-center align-items-center">
+        <div class="topHeading">
+            <h1>Additional info for members</h1>
+            <img src="./images/icons/underline06.svg" alt="" />
+        </div>
+
+        <ul>
+            <li>
+                <p>
+                    Benefits factor. Members can select a benefit factor which is
+                    a relative measure of people on benefits in an area. Please
+                    note the tool does not provide details on individual
+                    households, but at an area level (area being usually around 1
+                    - 5 postcodes but can be higher)
+                </p>
+            </li>
+            <li>
+                <p>
+                    Missing EPC's. Members also see properties with missing EPC's,
+                    both for a postcode and for a selected city / town
+                </p>
+            </li>
+            <li>
+                <p>
+                    Town / city selection. Members can access EPC's not just for a
+                    postcode, but for a whole city, therefore bulk queries
+                </p>
+            </li>
+            <li>
+                <p>
+                    Main gas. Members can filter by Mains gas, so can get off-grid
+                    properties or properties not on mains gas
+                </p>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<footer class="container-fluid d-flex flex-column justify-content-center align-items-center">
+    <div class="topPart">
+        <div class="topHeading">
+            <h1>CONTACT US</h1>
+            <img src="./images/icons/underline07.svg" alt="" />
+        </div>
+
+        <p>
+            Please email us at
+            <a href="mailto:hello@ecobrace.co.uk">hello@ecobrace.co.uk</a> if
+            you have any issues or want to provide feedback.
+        </p>
+    </div>
+
+    <div class="bottomPart">
+        <p>COPYRIGHT © 2024. ALL RIGHT RESERVED</p>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+

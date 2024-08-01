@@ -1,0 +1,591 @@
+﻿@page "/";
+@using warmbrace.Shared.Constants
+@implements IAsyncDisposable
+
+<PageTitle>Home | EcoBrace</PageTitle>
+
+@* <div class="container border border-3 border-danger">
+    <div class="text-center text-danger">
+        <h1 class="display-1">Error!</h1>
+        <p class="lead">One of the 3rd party API's (EPC's) is broken. We will post an update as soon as its fixed by the relevant body. Sorry for any inconvenience.</p>
+    </div>
+</div> *@
+
+@if (firstLogin)
+{
+    <!-- Prompt to log-out and log in again -->
+    <AuthorizeView>
+        <Authorized>
+            <div class="container mt-5">
+                <div class="text-center">
+                    <h3 class="display-3">Hi @userName, Welcome to EcoBrace!</h3>
+                    <p class="lead">Your all in one solution for ECO4 lead generation.</p>
+                    <div class="text-start mt-5">
+
+
+                        Welcome
+
+                        <p class=" text-center text-primary fs-1">
+                            Please log out and log back in to activate your account.
+                        </p>
+                        <p>
+                            Thanks for signing up to EcoBrace - your all in one AI powered ECO4 lead generation and analytics platform.
+
+                            Please log out and back in to activate your account.
+
+                            We treat all customers joining us in beta phase as 'Power users' which means any issues they face or any support they need is treated as highest priority.
+                            So please provide any feedback or send any issues on <a href="mailto:hello@ecobrace.co.uk" target="_blank" rel="noopener noreferrer">hello@ecobrace.co.uk</a>.
+
+                            Please note, for bulk / wider area searches, use postcode field with postcode district codes e.g. KT22, RG30.
+
+                            We sincerely hope you find the tool useful and saves you time and effort in your day-to-day work.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            You do not have access to this page
+        </NotAuthorized>
+    </AuthorizeView>
+}
+else
+{
+    <!-- Welcome -->
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-1">Welcome to EcoBrace!</h1>
+            <p class="lead">Your all in one solution for ECO4 lead generation.</p>
+
+            <AuthorizeView>
+                <NotAuthorized>
+                    <div class="btn-group mt-5 p-2 shadow-lg">
+                        <a class="btn btn-primary" href="#pricing">Try for free</a>
+                        <a class="btn btn-outline-primary" href="https://youtu.be/AdCSisZySvQ" target="_blank" rel="noopener noreferrer">Watch demo</a>
+                    </div>
+                    <p class="lead text-muted mt-2">No credit card required</p>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+    </div>
+}
+
+<!-- How it works -->
+<div class="container mt-5 mb-5 pb-5 col-md-8">
+    <h3 class="display-5 text-center">How it works</h3>
+    <p class="lead">
+        EcoBrace combines energy efficiency data with DWP benefits and helps identifying ECO4 eligible properties. You can use the <a href="analyst">analyst</a>
+        to perform bulk search on a particular postcode area e.g. KT22, and the tool returns thousands of properties in one hit. You can then narrow down the
+        results based on various filters e.g. Benefits Factor %, Mains gas, fuel type (oil, gas, electric etc.). Click <a href="https://youtu.be/AdCSisZySvQ" target="_blank" rel="noopener noreferrer">here</a> to see how it works,
+        or email us at <a href="mailto:hello@ecobrace.co.uk" target="_blank" rel="noopener noreferrer">hello@ecobrace.co.uk</a> to book a call for further info.
+    </p>
+    <ul class="list-group list-group-horizontal">
+        <li class="list-group-item list-group-item-primary">Bulk area searches</li>
+        <li class="list-group-item list-group-item-success">Filter on ECO4 eligible benefits %</li>
+        <li class="list-group-item list-group-item-danger">Filter on EPC bands</li>
+        <li class="list-group-item list-group-item-primary fw-bold">Properties with missing EPC</li>
+        <li class="list-group-item list-group-item-warning">Identify off mains gas properties</li>
+        <li class="list-group-item list-group-item-info">Export search results to CSV/Excel</li>
+    </ul>
+
+</div>
+
+<!-- Pricing -->
+<AuthorizeView>
+    <NotAuthorized>
+
+        @if (showLeadsMarketPlace)
+        {
+            <div id="pricing" class="container bg-light shadow-lg border-3 border-light rounded-3 mt-5 pb-2">
+                <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+                    <h1 class="display-4">Pricing</h1>
+                    <p class="lead">
+                        Analytics plan starts with an unlimited free trial restricted to Derby, Liverpool and Birmingham postcodes for you to test the tool***.
+                    </p>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-4 ">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">Analytics</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">£50<small class="text-muted">/mo + VAT</small></h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>Bulk search using partial postcode (e.g. KT22)</li>
+                                    <li>Filter by mains gas, fuel type etc.</li>
+                                    <li>Filter by Benefits factor</li>
+                                    <li>Commercial properties included (coming soon)</li>
+                                    <li>Excel and CSV export</li>
+                                    <li>Unlimited email support</li>
+                                    <li class="fw-bold">Cancel anytime</li>
+                                </ul>
+                                @* <button type="button" @onclick='eventArgs=>ShowModal("waitlistModal", "pro")' class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button> *@
+                                <a class="btn btn-lg btn-block btn-outline-primary" href="login?redirectUri=/">Sign up for free</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 ">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">Seller Basic</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">£0 <small class="text-muted">/ mo</small></h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>Sell leads</li>
+                                    <li>Basic EPC analytics</li>
+                                    <li>Search by EPC band</li>
+                                    <li>Search by postcode</li>
+                                    <li>Unlimited usage</li>
+                                    <li class="fw-bold">Cancel anytime</li>
+                                </ul>
+                                @* <button type="button" @onclick='eventArgs=>ShowModal("waitlistModal", "free")' class="btn btn-lg btn-block btn-outline-primary">Sign up for free*</button> *@
+                                <a class="btn btn-lg btn-block btn-outline-primary" href="login?redirectUri=/">Sign up for free</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 ">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">Seller Pro</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">£50<small class="text-muted">/mo + VAT</small></h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>Everything in Seller Basic</li>
+                                    <li>Everything in Analytics</li>
+                                    <li class="fw-bold">Cancel anytime</li>
+                                </ul>
+                                @* <button type="button" @onclick='eventArgs=>ShowModal("waitlistModal", "free")' class="btn btn-lg btn-block btn-outline-primary">Sign up for free*</button> *@
+                                <a class="btn btn-lg btn-block btn-outline-primary" href="login?redirectUri=/">Sign up for free</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 ">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">Buyer Basic</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">£0 <small class="text-muted">/ mo</small></h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>Buy leads</li>
+                                    <li>Basic EPC analytics</li>
+                                    <li>Search by EPC band</li>
+                                    <li>Search by postcode</li>
+                                    <li>Unlimited usage</li>
+                                    <li class="fw-bold">Cancel anytime</li>
+                                </ul>
+                                @* <button type="button" @onclick='eventArgs=>ShowModal("waitlistModal", "free")' class="btn btn-lg btn-block btn-outline-primary">Sign up for free*</button> *@
+                                <a class="btn btn-lg btn-block btn-outline-primary" href="login?redirectUri=/">Sign up for free</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 ">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">Buyer Pro</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">£50<small class="text-muted">/mo + VAT</small></h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>Everything in Buyer Basic</li>
+                                    <li>Everything in Analytics</li>
+                                    <li class="fw-bold">Cancel anytime</li>
+                                </ul>
+                                @* <button type="button" @onclick='eventArgs=>ShowModal("waitlistModal", "free")' class="btn btn-lg btn-block btn-outline-primary">Sign up for free*</button> *@
+                                <a class="btn btn-lg btn-block btn-outline-primary" href="login?redirectUri=/">Sign up for free</a>
+                            </div>
+                        </div>
+                    </div>
+                    @*                     <div class="col-12 col-md-3 ">
+                <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Premium</h4>
+                </div>
+                <div class="card-body">
+                <h1 class="card-title pricing-card-title">£200 <small class="text-muted">/ mo</small></h1>
+                <small class="fw-bold"> Everything in Pro + </small>
+                <ul class="list-unstyled mt-3 mb-4">
+                <li><span class="fw-bold text-primary">Properties with Missing EPC's**</span></li>
+                <li>Unlimited email and phone support</li>
+                <li class="fw-bold">Cancel anytime</li>
+                </ul>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="login?redirectUri=/">Sign up for free</a>
+                </div>
+                </div>
+                </div> *@
+                </div>
+
+                <span class="text-muted text-sm-start">
+                    *&nbsp;&nbsp;&nbsp;
+                    You don't need to sign-up to do basic EPC searches with full postcode
+                </span><br />
+
+            </div>
+        }
+        else
+        {
+            <div id="pricing" class="container bg-light shadow-lg border-3 border-light rounded-3 mt-5 pb-2">
+                <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+                    <h1 class="display-4">Pricing</h1>
+                    <p class="lead">
+                        Pro and Premium plans start with an unlimited free trial restricted to Derby, Liverpool and Birmingham postcodes for you to test the tool***.
+                    </p>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-4 ">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">Free Usage</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">£0 <small class="text-muted">/ mo</small></h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>Search by EPC band</li>
+                                    <li>Search by postcode</li>
+                                    <li>Unlimited usage</li>
+                                    <li>Provide feedback</li>
+                                    <li>Request features</li>
+                                    <li class="fw-bold">No need to Sign up*</li>
+                                </ul>
+                                @* <button type="button" @onclick='eventArgs=>ShowModal("waitlistModal", "free")' class="btn btn-lg btn-block btn-outline-primary">Sign up for free*</button> *@
+                                @* <a class="btn btn-lg btn-block btn-outline-primary" href="login?redirectUri=/">No need to Sign up*</a> *@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">Pro</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">£50<small class="text-muted">/mo + VAT</small></h1>
+                                <small class="fw-bold"> Everything in Free + </small>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>Filter by mains gas, fuel type etc.</li>
+                                    <li>Filter by Benefits factor</li>
+                                    <li>Commercial properties included (coming soon)</li>
+                                    <li>Bulk searches using postcode districts (e.g. KT22)</li>
+                                    <li>Excel and CSV export</li>
+                                    <li>Unlimited email support</li>
+                                    <li class="fw-bold">Cancel anytime</li>
+                                </ul>
+                                @* <button type="button" @onclick='eventArgs=>ShowModal("waitlistModal", "pro")' class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button> *@
+                                <a class="btn btn-lg btn-block btn-outline-primary" href="login?redirectUri=/">Sign up for free</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal">Premium</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">£200<small class="text-muted">/mo + VAT</small></h1>
+                                <small class="fw-bold"> Everything in Pro + </small>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li><span class="fw-bold text-primary">Properties with Missing EPC's**</span></li>
+                                    <li><span class="fw-bold text-primary">Scotland EPC bulk search</span></li>
+                                    <li>Unlimited email and phone support</li>
+                                    <li class="fw-bold">Cancel anytime</li>
+                                </ul>
+                                @* <button type="button" @onclick='eventArgs=>ShowModal("waitlistModal", "premium")' class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button> *@
+                                <a class="btn btn-lg btn-block btn-outline-primary" href="login?redirectUri=/">Sign up for free</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <span class="text-muted text-sm-start">
+                    *&nbsp;&nbsp;&nbsp;
+                    You don't need to sign-up to do basic EPC searches with full postcode
+                </span><br />
+                <span class="text-muted text-sm-start">
+                    **&nbsp;&nbsp;
+                    For premium plan missing EPC's' - you get 5,000 FREE full postcodes per month as part of the your plan, once you run out of your quota, its 0.05£ per postcode for missing EPC's.
+                    This only applies if you select missing EPC's in the filter. Normal bulk searches (without missing EPC's) are always free.
+                    For example, if you do a bulk search on KT22, which contains 1000 individual postcodes, it will cost you £50 (1000*£0.05=£50).
+                    You can minimise costs by applying filters like EPC band = (E,F,G, Missing) and Mains Gas = No, this will then reduce postcodes to around 75, and the cost will be just
+                    £3.75 (75*£0.05=£3.75). <span class="fst-italic">The app will give you a warning when you are low on credit and perform a search, so you will always be in control.</span>
+                </span><br />
+                <span class="text-muted text-sm-start">
+                    ***&nbsp;&nbsp;
+                    Pro and Premium plans start as free trials for unlimited amount of time for you to play around with the tool. Once you are ready to upgrade, we remove restrictions and you gain full access to the whole of England and Wales.
+                </span>
+
+            </div>
+        }
+    </NotAuthorized>
+</AuthorizeView>
+
+<!-- Customers -->
+<AuthorizeView>
+    <NotAuthorized>
+
+        <div class="container mt-5 mb-5 pb-5 text-center bg-warning bg-opacity-50 shadow-lg border-3 border-light rounded-3">
+            <h1 class="display-4 mb-5">Some of Our Customers</h1>
+            <div class="row justify-content-md-center ">
+                <div class="col-md-4 col-lg-2">
+                    <img src="./images/slider/improveasy.svg" alt="" />
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <img src="./images/slider/his.png" alt="" />
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <img src="./images/slider/microgen.png" alt="" style="width: 60%" />
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <img src="./images/slider/snughome.png" alt="" />
+                </div>
+                <div class="col-md-4 col-lg-2">
+                    <img src="./images/slider/ruralenergy.webp" alt="" style="width: 60%" />
+                </div>
+            </div>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+<!-- Latest updates -->
+<div class="container mt-5">
+
+    <h3 class="display-5 mb-3">Latest updates:</h3>
+
+    <h5><small class="text-muted">30-Jul-2024</small></h5>
+    <ul>
+        <li>
+            <span class="fw-bold text-primary">Missing EPC data</span> is now readily available for all of England and Wales.
+            So rather than loading data on demand for addresses with missing EPC's, now its made available for every search (for premium members only).
+        </li>
+    </ul>
+
+    <h5><small class="text-muted">13-Jul-2024</small></h5>
+    <ul>
+        <li>
+            Added <span class="fw-bold text-primary">Scottish EPC's</span> in our search engine (premium members only). Members can search on full postcodes
+            or bulk search using partial postcodes (postcode districts).
+        </li>
+    </ul>
+
+    <h5><small class="text-muted">10-Jul-2024</small></h5>
+    <ul>
+        <li>
+            Missing EPC count now available on summary charts for premium members.
+        </li>
+    </ul>
+
+    <h5><small class="text-muted">09-Jul-2024</small></h5>
+    <ul>
+        <li>
+            In line with the popularity of GBIS, we have added roof / loft specific details in search results grid including Roof type (e.g. Pitched or Flat),
+            loft insulation depth (e.g. 100 mm, 25mm etc.) and Roof energy efficiency. These measures help identifying potential loft / GBIS work. These are only available to paid members.
+        </li>
+    </ul>
+
+    <h5><small class="text-muted">23-Jun-2024</small></h5>
+    <ul>
+        <li>
+            Added GBIS Scoring calculator based on Ofgem GBIS Matrix v2. As an added bonus, you can use search for an EPC to populate some of the inputs.
+            The calculator gives you PPS scores and potential funding.
+        </li>
+    </ul>
+
+    <h5><small class="text-muted">09-May-2024</small></h5>
+    <ul>
+        <li>
+            We have added a <span class="fw-bold text-primary"> new data enrichment service</span> where if you have a file of names/addresses and want to add more information (e.g. EPC information like fuel type, gas,
+            electric, oil, floor area, band, walls type cavity / solid, heating system e.g. storage heaters or add benefits information), we can add that information for you.
+            We have the ability to add around 50k records in 24 hours. This is very useful for lead generators, <span class="fw-bold text-primary">call centres</span> and digital marketeers who have the names / addresses / phone numbers, but want to
+            add more information to it. You can obviously add the EPC data yourself as it is public data, what we provide is <span class="fw-bold text-primary"> bulk data adding for millions of records at speed </span>.
+        </li>
+    </ul>
+
+    <h5><small class="text-muted">30-Apr-2024</small></h5>
+    <ul>
+        <li>
+            Loaded missing benefits data for Isle of Wight, Isles of Scilly, Islington, Kensington and Chelsea, Kingston upon Thames and Kirklees.
+        </li>
+    </ul>
+
+    <h5><small class="text-muted">29-Apr-2024</small></h5>
+    <ul>
+        <li><span class="fw-bold text-primary">Added B11 (Birmingham) to free trial area</span>, so now you can create an account for free and start using the tool for Birmingham, Derby and Liverpool without any cost.</li>
+        <li>
+            Loaded missing benefits data for Harrow, Hart, Hartlepool, Hastings, Havant, Havering, Herefordshire, County of, Hertsmere, High Peak,
+            Hinckley and Bosworth, Horsham, Huntingdonshire, Hyndburn and Isle of Anglesey.
+        </li>
+    </ul>
+
+    <h5><small class="text-muted">26-Apr-2024</small></h5>
+    <ul>
+        <li>
+            Loaded missing benefits data for Hackney, Halton, Hambleton, Hammersmith and Fulham, Harborough, Haringey, Harlow and Harrogate.
+        </li>
+    </ul>
+
+    <h5><small class="text-muted">25-Apr-2024</small></h5>
+    <ul>
+        <li>
+            Loaded missing benefits data for Chelmsford, Cheltenham, Cherwell, Cheshire East, Cheshire West and Chester, Chesterfield, Chichester, City of Edinburgh,
+            City of London, Copeland, Cornwall, Cotswold, Craven, Crawley, Croydon, Dacorum, Dartford, Denbighshire, Dover, Dudley, East Cambridgeshire, East Devon,
+            East Hampshire, East Hertfordshire, East Lindsey, East Staffordshire, East Suffolk, Eastbourne, Eden, Elmbridge, Enfield, Epping Forest, Epsom and Ewell,
+            Erewash, Exeter, Fareham, Fenland, Flintshire, Folkestone and Hythe, Forest of Dean, Gateshead, Gedling, Gloucester, Gosport, Gravesham, Great Yarmouth,
+            Greenwich and Guildford.
+        </li>
+    </ul>
+
+    <h5><small class="text-muted">14-Apr-2024</small></h5>
+    <ul>
+
+        <li>
+            Launched <span class="fw-bold text-primary">Map view</span>, where various metrics (benefits %, EPC ratings, mains gas etc.) can be visualized by country/region/local authority/postcode district.
+            Only benefits % is available at the moment, more metrics are being populated.
+        </li>
+        <li>
+            Loaded missing benefits data for Stockton-on-Tees, Redbridge, Brighton and Hove, County Durham, Knowsley, Bristol, Bromley, Bromsgrove,
+            Broxbourne, Buckinghamshire, Broxtowe, Broxtowe, Redcar and Cleveland, Burnley, Bury, Caerphilly, Calderdale, Cambridge, Camden,
+            Cannock Chase, Canterbury, Cardiff, Carlisle, Carmarthenshire, Castle Point, Central Bedfordshire, Ceredigion, Charnwood.
+        </li>
+    </ul>
+
+    <h5><small class="text-muted">01-Apr-2024</small></h5>
+    <ul>
+        <li>
+            Loaded missing benefits data for Middlesbrough, Brent, Brentwood
+        </li>
+        <li>Improved search performance when Benefits Threshold % is provided</li>
+    </ul>
+
+    <h5><small class="text-muted">24-Mar-2024</small></h5>
+    <ul>
+        <li>
+            Loaded missing benefits data for Adur, Allerdale, Conwy, Amber Valley, Arun, Babergh, Barnsley, Barrow-in-Furness, Ealing, Basildon, Bassetlaw,
+            Bath and North East Somerset, Bexley, Birmingham, Blaby, Blackburn with Darwen, Blackpool, Blaenau Gwent, Bolsover, Bolton, Boston, Bracknell Forest,
+            Bradford, Braintree, Breckland
+        </li>
+        <li>Improved search performance</li>
+    </ul>
+
+    <h5><small class="text-muted">12-Mar-2024</small></h5>
+    <ul>
+        <li>
+            Loaded missing benefits data for Chorley, Ashford, Bridgend, South Cambridgeshire, Oxford, Colchester, Tewkesbury, Castle,  Point,
+            Basingstoke and Deane, Southwark, Leeds, Sedgemoor, Runnymede, Derbyshire Dales, Darlington, Dorset, Kingston upon Hull, Luton and South Derbyshire
+        </li>
+        <li>Added tenure (owner / renter), floor area and wall type</li>
+        <li>Used a checkbox for ‘Include properties with missing EPC’ rather than making it part of EPC dropdown. Only available for premium plan</li>
+        <li>Added a reset button to reset filters and clear results</li>
+        <li>
+            Added Eco Coefficient at address level (only available for premium members). It gives a measure of how likely a property is ECO4 eligible.
+            It is a combination of energy rating (EPC bands) and benefits and has a value between 0 and 1, the higher the more ECO4 eligible.
+            Plan is to add it at a postcode and city level as well in future.
+        </li>
+    </ul>
+
+    <h5><small class="text-muted">05-Mar-2024</small></h5>
+    <ul>
+        <li>Loaded missing benefits data for St. Helens, Tameside, Sefton, Fylde, South Ribble, West Lancashire and Wyre</li>
+        <li>Fixed EPC date format in grid (changed it to d-mmm-yyyy)</li>
+        <li>
+            Streamlined our pricing structure. So for Pro users, its <span class="fw-bold text-primary">£50 per month</span>, and for premium users, its
+            <span class="fw-bold text-primary">£200 per month with a quota of 10,000 postcodes with missing EPC's</span> and option to buy extra credits for more searches. For example, if you do a bulk search on KT22, which contains 1000 individual postcodes,
+            it will cost you £20 (1000*£0.02=£20). You can minimise costs by applying filters like EPC band = (E,F,G, Missing) and Mains Gas = No,
+            this will then reduce postcodes to around 50, and the cost will be just £1 (50*£0.02=£1). The app will give you a warning when you are low on credit and
+            perform a search, so you will always be in control.
+        </li>
+    </ul>
+
+    <h5><small class="text-muted">03-Mar-2024</small></h5>
+    <ul>
+        <li>Added <span class="fw-bold text-primary">CSV and Excel export</span> in the results table. Excel export also formats the data nicely with headings and fonts.</li>
+        <li>Moved our servers to <span class="fw-bold text-primary">Microsoft cloud</span> platform Azure and also scaled them up to provide better security and performance. All our data and API's are now hosted within the UK.</li>
+    </ul>
+
+    <h5><small class="text-muted">01-Mar-2024</small></h5>
+    <ul>
+        <li>Loaded missing benefits data for Hillingdon, Broadland and Barking and Dagenham</li>
+        <li>Town / city filter removed for performance reasons. Please use postcode filter with postcode district for bulk searches</li>
+        <li>Fixed the bug where some of the EPC's were not the latest ones for a property</li>
+        <li>Filtering on EPC date is now available in the results table. You can select dates between a given range</li>
+        <li>Fixed the bug where tool was picking wrong EPC's for a given postcode e.g. for WA11, it was also picking some from WA1'</li>
+    </ul>
+
+    <h5><small class="text-muted">28-Feb-2024</small></h5>
+    <ul>
+        <li>
+            Loaded missing benefits data for Gwynedd, Torbay, East Riding of Yorkshire, North Devon, Merton
+        </li>
+        <li>Added Excel type filtering in search results table, so once initial data is loaded, you can just filter in the table as that is much faster</li>
+        <li><span class="fw-bold text-primary">Removed credit card requirement to start the FREE trial</span>, so now you can sign-up and start using the tool straight-away</li>
+    </ul>
+
+    <h5><small class="text-muted">26-Feb-2024</small></h5>
+    <ul>
+        <li>
+            Loaded missing benefits data for Coventry, Warwick, Ipswich, Lambeth, Bedford, Ashfield, South Tyneside, Oldham, Bournemouth, Christchurch and Poole and South Lakeland
+        </li>
+        <li>Bug fix where app was not showing more than 5000 search results for a postcode district (first part of a postcode), now it can show more than 30,000 (we have not tested the upper limit yet).</li>
+        <li>Added Benefits Factor % in result table (for members)</li>
+        <li>Added Main fuel filter (so you can select oil, wood, LPG, gas etc.)</li>
+    </ul>
+
+    <h5><small class="text-muted">23-Feb-2024</small></h5>
+    <ul>
+        <li>Loaded missing benefits data for Warrington, Portsmouth, Sutton (Surrey), Eastleigh and Hounslow</li>
+        <li>Added sorting and pagination in search results table (click on a column header to sort)</li>
+        <li>Added summary charts with count of EPC’s, mains gas and property types (flat, house)</li>
+    </ul>
+
+    <h5><small class="text-muted">22-Feb-2024</small></h5>
+    <ul>
+        <li>Loaded missing benefits data for York and Walsall</li>
+        <li>Ability to filter on multiple epc bands</li>
+        <li>Main fuel (e.g. LPG, Oil, Electricity) is now displayed in search results. This will further help determine off-grid properties or properties not on mains</li>
+    </ul>
+
+    <h5><small class="text-muted">21-Feb-2024</small></h5>
+    <ul>
+        <li>Loaded missing benefits data for Derby and Preston</li>
+        <li>Added support for search by postcode districts for paid members (first part of postcode e.g. RG4 in RG4 5LX)</li>
+        <li>Filtering results by ‘Mains GAS’ flag (Y/N) for an area / postcode</li>
+        <li>Checkbox to include or exclude properties in an area with missing benefits data (only applicable when Benefit Factor % is used and is more than 0)</li>
+    </ul>
+
+</div>
+
+<!-- Notes, info, contact -->
+<div class="container mt-5 mb-5 pb-5">
+    <h3 class="display-5">Notes:</h3>
+    <ul>
+        <li>Only latest EPC's are included for a property</li>
+        <li>Only residential data is incldued in all analyses (we can include commercial data as well e.g. Epc's if there is enough demand from users)</li>
+        <li>
+            The data is extarcted from various sources, latest EPC's for every property, benefits data at area level (area is usually between 1 - 5 postcodes),
+            geography data (addresses) and various other third party data sources are included
+        </li>
+        <li>
+            Only England and Wales is supported at the moment. We plan to work on supporting Scotland data starting in April, but if theer is enough demand,
+            we can bring it in early. Please email at <a href="mailto:hello@ecobrace.co.uk" target="_blank" rel="noopener noreferrer">hello@ecobrace.co.uk</a> if you
+            want to see Scottish data.
+        </li>
+    </ul>
+
+    <h3 class="display-5 mt-5">Additional info for members:</h3>
+    <ul>
+        <li>Benefits factor. Members can select a benefit factor which is a relative measure of people on benefits in an area. Please note the tool does not provide details on individual households, but at an area level (area being usually around 1 - 5 postcodes but can be higher) </li>
+        <li>Missing EPC's. Members also see properties with missing EPC's, both for a postcode and for a selected city / town</li>
+        <li>Town / city selection. Members can access EPC's not just for a postcode, but for a whole city, therefore bulk queries</li>
+        <li>Main gas. Members can filter by Mains gas, so can get off-grid properties or properties not on mains gas</li>
+    </ul>
+
+    <h3 class="display-5 mt-5">Contact us</h3>
+    <ul>
+        <li>Please email us at <a href="mailto:hello@ecobrace.co.uk" target="_blank" rel="noopener noreferrer">hello@ecobrace.co.uk</a> if you have any issues or want to provide feedback</li>
+    </ul>
+
+</div>
+
+<!-- Waiting list modal -->

@@ -1,0 +1,76 @@
+﻿@page "/signup-acknowledge"
+@using warmbrace.Shared.Constants
+@inject TokenProvider tokenProvider
+@attribute [Authorize]
+
+<PageTitle>Profile</PageTitle>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <h2>Profile</h2>
+
+            <div class="col-md-2">
+                <img src="@Picture"
+                     alt="" class="img-rounded img-responsive" />
+            </div>
+            <div class="col-md-4">
+                <h3>@Username</h3>
+                <p>
+                    <i class="bi bi-envelope"></i> @EmailAddress
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h3>Role(s)</h3>
+                @foreach (var role in Roles)
+                {
+                    <p>
+                        <i class="bi bi-envelope"></i> @role
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthenticationStateTask { get; set; }
+    private string Username = "";
+    private string EmailAddress = "";
+    private string Picture = "";
+    private string IdToken = "";
+    private List<string> Roles = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthenticationStateTask;
+
+        Username = state.User.Identity.Name ?? string.Empty;
+        EmailAddress = state.User.Claims
+            .Where(c => c.Type.Equals(System.Security.Claims.ClaimTypes.Email))
+            .Select(c => c.Value)
+            .FirstOrDefault() ?? string.Empty;
+
+        Picture = state.User.Claims
+            .Where(c => c.Type.Equals("picture"))
+            .Select(c => c.Value)
+            .FirstOrDefault() ?? string.Empty;
+
+
+        //IdToken = tokenProvider.IdToken;
+
+        if (state.User.IsInRole(EcobraceUserRoles.Admin))
+            Roles.Add(EcobraceUserRoles.Admin);
+        if (state.User.IsInRole(EcobraceUserRoles.FreeUser))
+            Roles.Add(EcobraceUserRoles.FreeUser);
+        if (state.User.IsInRole(EcobraceUserRoles.ProUser))
+            Roles.Add(EcobraceUserRoles.ProUser);
+        if (state.User.IsInRole(EcobraceUserRoles.PremUser))
+            Roles.Add(EcobraceUserRoles.PremUser);
+
+        await base.OnInitializedAsync();
+    }
+}
+
