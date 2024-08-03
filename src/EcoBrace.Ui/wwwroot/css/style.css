@@ -122,7 +122,11 @@ p {
         padding-right: 11rem !important;
     }
 }
-
+@media (min-width: 700px) {
+    .desktop_view {
+        padding-right:2.5rem !important;
+    }
+}
 .mainContainer {
   flex-wrap: wrap;
 }
