@@ -29,6 +29,20 @@ html {
     color: var(--black-color);
     position: relative;
 }
+.oval-container {
+    width: 250px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+    border-radius: 40% !important; /* This makes the container oval */
+    overflow: hidden; /* Ensures the image fits within the container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .oval-container img {
+        width: 75%;
+        height: auto;
+    }
 .circle {
     width: 56px;
     height: 56px;
