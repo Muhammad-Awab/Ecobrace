@@ -7,21 +7,6 @@
     flex-direction: column;
 }
 
-.oval-container {
-    width: 250px; /* Adjust the width as needed */
-    height: 150px; /* Adjust the height as needed */
-    border-radius: 40% !important; /* This makes the container oval */
-    overflow: hidden; /* Ensures the image fits within the container */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-    .oval-container img {
-        width: 75%;
-        height: auto;
-    }
-
 main[b-27h4dbia34] {
     flex: 1;
 }
@@ -83,17 +68,10 @@ main[b-27h4dbia34] {
         z-index: 1;
     }
 
-
-    .top-row[b-27h4dbia34], article[b-27h4dbia34] {
+    .top-row[b-27h4dbia34],
+    article[b-27h4dbia34] {
         padding-left: 2rem !important;
-        padding-right: 11rem !important;
-    }
-
-    @media (min-width: 820px) and (min-width: 1024px) {
-        .top-row[b-27h4dbia34], article[b-27h4dbia34] {
-            padding-left: 2rem !important;
-            padding-right: 11rem !important;
-        }
+        padding-right: 2.5rem !important;
     }
 }
 /* _content/EcoBrace.Ui/Shared/NavMenu.razor.rz.scp.css */
