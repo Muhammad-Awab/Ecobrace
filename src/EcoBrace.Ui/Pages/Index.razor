@@ -1,11 +1,19 @@
 ﻿@page "/"
 @inject IJSRuntime Js
 
+@code{
+    public string url = "https://www.youtube.com/embed/AdCSisZySvQ";
+   public void clearUrl()
+    {
+        url = "";
+    }
+    public void LoadVideo()
+    {
+        url = "https://www.youtube.com/embed/AdCSisZySvQ";
+    }
 
-<style>
+}
 
-</style>
-<div class="rightSide">
 
     <header class="container-fluid d-flex justify-content-center align-items-center">
         <div class="row center_content d-flex justify-content-center align-items-center">
@@ -34,6 +42,7 @@
             <div class="col-12 col-sm-6 videoContainer">
                 <button type="button"
                         class="video"
+                        @onclick="LoadVideo"
                         data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <div class="shape"></div>
 
@@ -60,51 +69,24 @@
                     </div>
                 </button>
 
-                <div class="modal fade"
-                     id="videoModal"
-                     tabindex="-1"
-                     role="dialog"
-                     aria-labelledby="videoModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header d-flex justify-content-between align-items-center">
-                                <h5 class="modal-title" id="videoModalLabel">
-                                    Watch Demo
-                                </h5>
-                                <button type="button"
-                                        class="close modalCloseIcon"
-                                        data-dismiss="modal"
-                                        aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="embed-responsive embed-responsive-16by9">
-                                    <iframe class="embed-responsive-item"
-                                            id="videoIframe"
-                                            src="https://www.youtube.com/embed/AdCSisZySvQ"
-                                            allowfullscreen></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            
+
             </div>
         </div>
     </header>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" data-bs-backdrop="static" role="dialog" aria-labelledby="exampleModalLabel videoModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" @onclick="clearUrl" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item"
                                 id="videoIframe"
-                                src="https://www.youtube.com/embed/AdCSisZySvQ"
+                                src="@url"
                                 allowfullscreen></iframe>
                     </div>
                 </div>
@@ -443,99 +425,7 @@
     </section>
 
 
-    @* <section class="container-fluid d-flex justify-content-center align-items-center section04">
-    <div class="center_content">
-    <div class="topHeading">
-    <h1>Latest updates</h1>
-    <img src="./images/icons/underline04.svg" alt="" />
-    </div>
-
-    <div class="updates">
-    <div class="update01">
-    <h1>13-Jul-2024</h1>
-    <p>
-    Added Scottish EPC's in our search engine (premium members
-    only). Members can search on full postcodes or bulk search
-    using partial postcodes (postcode districts).
-    </p>
-    </div>
-    <div class="update01">
-    <h1>10-Jul-2024</h1>
-    <p>
-    Missing EPC count now available on summary charts for premium
-    members.
-    </p>
-    </div>
-    <div class="update01">
-    <h1>09-Jul-2024</h1>
-    <p>
-    In line with the popularity of GBIS, we have added roof / loft
-    specific details in search results grid including Roof type
-    (e.g. Pitched or Flat), loft insulation depth (e.g. 100 mm,
-    25mm etc.) and Roof energy efficiency. These measures help
-    identifying potential loft / GBIS work. These are only
-    available to paid members.
-    </p>
-    </div>
-    <div class="update01">
-    <h1>23-Jun-2024</h1>
-    <p>
-    Added GBIS Scoring calculator based on Ofgem GBIS Matrix v2.
-    As an added bonus, you can use search for an EPC to populate
-    some of the inputs. The calculator gives you PPS scores and
-    potential funding.
-    </p>
-    </div>
-    <div class="update01">
-    <h1>13-Jul-2024</h1>
-    <p>
-    Added Scottish EPC's in our search engine (premium members
-    only). Members can search on full postcodes or bulk search
-    using partial postcodes (postcode districts).
-    </p>
-    </div>
-    <div class="update01">
-    <h1>10-Jul-2024</h1>
-    <p>
-    Missing EPC count now available on summary charts for premium
-    members.
-    </p>
-    </div>
-    <div class="update01">
-    <h1>09-Jul-2024</h1>
-    <p>
-    In line with the popularity of GBIS, we have added roof / loft
-    specific details in search results grid including Roof type
-    (e.g. Pitched or Flat), loft insulation depth (e.g. 100 mm,
-    25mm etc.) and Roof energy efficiency. These measures help
-    identifying potential loft / GBIS work. These are only
-    available to paid members.
-    </p>
-    </div>
-    <div class="update01">
-    <h1>23-Jun-2024</h1>
-    <p>
-    Added GBIS Scoring calculator based on Ofgem GBIS Matrix v2.
-    As an added bonus, you can use search for an EPC to populate
-    some of the inputs. The calculator gives you PPS scores and
-    potential funding.
-    </p>
-    </div>
-    </div>
-
-    <button class="btn loadMore">
-    View More Updates
-    <svg width="26"
-    height="8"
-    viewBox="0 0 26 8"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg">
-    <path d="M25.3536 4.35355C25.5488 4.15829 25.5488 3.84171 25.3536 3.64645L22.1716 0.464466C21.9763 0.269204 21.6597 0.269204 21.4645 0.464466C21.2692 0.659728 21.2692 0.976311 21.4645 1.17157L24.2929 4L21.4645 6.82843C21.2692 7.02369 21.2692 7.34027 21.4645 7.53553C21.6597 7.7308 21.9763 7.7308 22.1716 7.53553L25.3536 4.35355ZM0 4.5H25V3.5H0V4.5Z"
-    fill="white" />
-    </svg>
-    </button>
-    </div>
-    </section> *@
+   
 
     <section class="container-fluid d-flex justify-content-center align-items-center section04">
         <div class="center_content">
@@ -729,7 +619,6 @@
             <p>COPYRIGHT © 2024. ALL RIGHT RESERVED</p>
         </div>
     </footer>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
