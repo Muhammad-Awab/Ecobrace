@@ -13,8 +13,43 @@
 html {
   scroll-behavior: smooth;
 }
-
-body {
+.loginBtn {
+    width: 102px;
+    height: 35px;
+    padding: 16px 31px;
+    border-radius: 10px;
+    background-color: var(--yellow-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-poppins);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: var(--black-color);
+    position: relative;
+}
+.circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(254, 182, 36, 1);
+    position: absolute;
+    right: -42px;
+}
+    .circle .innerCircle {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background-color: rgba(255, 193, 67, 1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    body {
   overflow-x: hidden;
 }
 
@@ -80,6 +115,12 @@ p {
 .animateElement {
   filter: blur(1px);
   transform: scale(0.8) translateY(20px);
+}
+@media (min-width: 641px) {
+    .top-row[b-27h4dbia34], article[b-27h4dbia34] {
+        padding-left: 2rem !important;
+        padding-right: 3.5rem !important;
+    }
 }
 
 .mainContainer {
