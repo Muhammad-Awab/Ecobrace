@@ -50,12 +50,18 @@ public partial class Index
 
         await base.OnInitializedAsync();
     }
+    private async Task ScrollToSection()
+    {
+        await Js.InvokeVoidAsync("scrollToSection", "tryForFree");
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/Index.razor.js");
+            await Js.InvokeVoidAsync("import", "/script/latestupdates.js");
+            await Js.InvokeVoidAsync("import", "/script/slider.js");
         }
 
     }
@@ -122,11 +128,5 @@ public partial class Index
         }
     }
 
-    async ValueTask IAsyncDisposable.DisposeAsync()
-    {
-        if (module is not null)
-        {
-            await module.DisposeAsync();
-        }
-    }
+   
 }

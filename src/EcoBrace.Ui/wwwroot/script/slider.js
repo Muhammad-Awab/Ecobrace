@@ -14,3 +14,7 @@
     next = next.nextElementSibling;
         }
     });
+
+function scrollToSection(sectionId) {
+    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+}

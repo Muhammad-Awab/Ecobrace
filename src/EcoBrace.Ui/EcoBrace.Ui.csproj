@@ -8,6 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\script\latestupdates.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\script\latestupdates.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\script\latestupdates.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.4.1" />
     <PackageReference Include="Blazored.Toast" Version="4.2.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
@@ -23,9 +35,6 @@
     <PackageReference Include="Syncfusion.Blazor.Maps" Version="26.1.38" />
     <PackageReference Include="Syncfusion.Blazor.Themes" Version="26.1.38" />
     <PackageReference Include="warmbrace.Shared" Version="1.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
   </ItemGroup>
 
 </Project>

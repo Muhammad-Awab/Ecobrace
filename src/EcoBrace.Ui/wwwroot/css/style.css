@@ -750,15 +750,15 @@ footer .topPart .topHeading img {
   gap: 27px;
   margin-top: 18px;
 }
-.section04 .center_content .updates .update01 {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 8px;
-
-}
+    .section04 .center_content .updates .update01 {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 8px;
+        display: none;
+    }
 .section04 .center_content .updates .update01 h1 {
   font-family: var(--font-poppins);
   font-weight: 500;
@@ -1605,3 +1605,5 @@ footer .bottomPart p {
 .carousel-inner .carousel-item-end, .carousel-inner .carousel-item-start {
     transform: translateX(0)
 }
+
+
