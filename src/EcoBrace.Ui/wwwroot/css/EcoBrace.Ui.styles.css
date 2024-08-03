@@ -83,10 +83,17 @@ main[b-27h4dbia34] {
         z-index: 1;
     }
 
-    .top-row[b-27h4dbia34],
-    article[b-27h4dbia34] {
+
+    .top-row[b-27h4dbia34], article[b-27h4dbia34] {
         padding-left: 2rem !important;
-        padding-right: 2.5rem !important;
+        padding-right: 11rem !important;
+    }
+
+    @media (min-width: 820px) and (min-width: 1024px) {
+        .top-row[b-27h4dbia34], article[b-27h4dbia34] {
+            padding-left: 2rem !important;
+            padding-right: 11rem !important;
+        }
     }
 }
 /* _content/EcoBrace.Ui/Shared/NavMenu.razor.rz.scp.css */
